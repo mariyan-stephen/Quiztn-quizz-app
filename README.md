@@ -16,7 +16,7 @@ Quiztn is a real-time multiplayer quiz application that allows users to compete 
 - Backend: Node.js, Express.js, Socket.IO
 - Database: PostgreSQL
 - Authentication: Passport.js
-- Deployment: Heroku
+- Deployment: ?
 
 
 ## TODO
