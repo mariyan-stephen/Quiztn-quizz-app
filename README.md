@@ -14,7 +14,7 @@ Quiztn is a real-time multiplayer quiz application that allows users to compete 
 - Backend: Node.js, Express.js, Socket.IO
 - Database: PostgreSQL
 - Authentication: Passport.js
-- Deployment: Firebase?
+- Deployment: ?
 
 ## TODO
 - ~~Set up your Node.js environment and initialize a new project.~~
@@ -25,7 +25,8 @@ Quiztn is a real-time multiplayer quiz application that allows users to compete 
 - Implement the quiz logic on the server-side and use Socket.IO to push updates to the client-side.
 - Create a chat system where users can send and receive messages in real-time.
 - Implement a leaderboard to show the top scorers.
+- Add database migration using Knex.js.
 - Ensure proper error handling and security measures are in place.
-- Set up deployment (Firebase?).
+- Set up deployment (Heroku, AWS, etc.).
 - Write tests to ensure application functionality.
 - Create a user-friendly and visually appealing UI/UX.
