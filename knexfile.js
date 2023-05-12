@@ -8,7 +8,8 @@ module.exports = {
       database : 'quiztn_db' // replace with your PostgreSQL database name
     },
     migrations: {
-      tableName: 'knex_migrations'
+      tableName: 'knex_migrations',
+      directory: 'C:/Users/tinke/OneDrive/Desktop/quiztn-quizz-app/migrations' // path to your migrations directory
     }
   }
 };
