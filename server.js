@@ -19,60 +19,35 @@ app.use(session({
 }));
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    db.one('SELECT id, username, password FROM users WHERE username = $1', [username])
-      .then(user => {
-        bcrypt.compare(password, user.password, (err, res) => {
-          if(res) {
-            // Passwords match
-            return done(null, user);
-          } else {
-            // Passwords don't match
-            return done(null, false, { message: 'Incorrect password.' });
-          }
-        })
-      })
-      .catch(err => done(err));
-  }
-));
+// ... Passport setup code ...
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
+// ... Registration and login routes ...
+
+app.post('/games', (req, res) => {
+  db.one('INSERT INTO games DEFAULT VALUES RETURNING id')
+    .then(data => {
+      res.json({ gameId: data.id });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send('Error creating game');
+    });
 });
 
-passport.deserializeUser(function(id, done) {
-  db.one('SELECT id, username FROM users WHERE id = $1', [id])
-    .then(user => done(null, user))
-    .catch(err => done(err));
+app.post('/games/:id/join', (req, res) => {
+  // Add functionality here
 });
 
-app.post('/register', (req, res) => {
-  bcrypt.hash(req.body.password, saltRounds, (err, hashedPassword) => {
-    if (err) {
-      res.send(err);
-    } else {
-      db.none('INSERT INTO users(username, password) VALUES($1, $2)', [req.body.username, hashedPassword])
-        .then(() => res.redirect('/login'))
-        .catch(err => res.send(err));
-    }
-  });
+app.post('/games/:id/answer', (req, res) => {
+  // Add functionality here
 });
 
-app.post('/login', passport.authenticate('local', { 
-  successRedirect: '/', 
-  failureRedirect: '/login' 
-}));
-
-app.get('/', (req, res) => {
-  if(req.user) {
-    res.send(`Hello, ${req.user.username}!`);
-  } else {
-    res.send('Hello World!');
-  }
+app.get('/games/:id', (req, res) => {
+  // Add functionality here
 });
 
 io.on('connection', (socket) => {
