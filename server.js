@@ -39,15 +39,33 @@ app.post('/games', (req, res) => {
 });
 
 app.post('/games/:id/join', (req, res) => {
-  // Add functionality here
+  // Get the game ID from the URL
+  const gameId = req.params.id;
+  
+  // Get the user ID from the session
+  const userId = req.user.id;
+  
+  // Add the user to the game
+  db.none('INSERT INTO game_participants (game_id, user_id) VALUES ($1, $2)', [gameId, userId])
+    .then(() => {
+      res.send(`User ${userId} joined game ${gameId}`);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send('Error joining game');
+    });
 });
 
 app.post('/games/:id/answer', (req, res) => {
-  // Add functionality here
+  // This endpoint should accept a user's answer for the current question
+  // For now, let's just send a placeholder response
+  res.send(`Answer received for game ${req.params.id}!`);
 });
 
 app.get('/games/:id', (req, res) => {
-  // Add functionality here
+  // This endpoint should return the current state of a game
+  // For now, let's just send a placeholder response
+  res.send(`Game state for game ${req.params.id}!`);
 });
 
 io.on('connection', (socket) => {
