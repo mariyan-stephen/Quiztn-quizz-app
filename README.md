@@ -20,7 +20,7 @@ Quiztn is a real-time multiplayer quiz application that allows users to compete 
 - [x] Set up your Node.js environment and initialize a new project.
 - [x] Set up Express.js for creating the server.
 - [ ] Set up Socket.IO for real-time communication.
-- [x] Design your frontend with HTML, CSS, and JavaScript. Consider using Bootstrap or Material-UI for styling.
+- [ ] Design your frontend with HTML, CSS, and JavaScript. Consider using Bootstrap or Material-UI for styling.
 - [x] Create your database schema for storing user information.
 - [ ] Create your database schema for storing quiz questions and scores.
 - [x] Implement user registration using Passport.js.
