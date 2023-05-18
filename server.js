@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
@@ -13,7 +15,7 @@ const saltRounds = 10;
 
 // Use sessions for tracking logins
 app.use(session({
-  secret: 'Your session secret',
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true
 }));
@@ -23,9 +25,67 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-// ... Passport setup code ...
+// Passport setup code
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    db.one('SELECT * FROM users WHERE username = $1', [username])
+      .then(user => {
+        if (!user) {
+          return done(null, false, { message: 'Incorrect username.' });
+        }
+        bcrypt.compare(password, user.password, (err, result) => {
+          if (err) {
+            return done(err);
+          }
+          if (!result) {
+            return done(null, false, { message: 'Incorrect password.' });
+          }
+          return done(null, user);
+        });
+      })
+      .catch(err => done(err));
+  }
+));
 
-// ... Registration and login routes ...
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+// Registration route
+app.post('/register', (req, res) => {
+  const { username, password, email } = req.body;
+
+  // Hash the password
+  bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error registering user');
+      return;
+    }
+
+    // Log the user data right before making the query
+    console.log('Registering user:', { username, password, email });
+
+    // Insert the new user into the database
+    db.none('INSERT INTO users (username, password, email) VALUES ($1, $2, $3)', [username, hashedPassword, email])
+      .then(() => {
+        res.send(`User ${username} registered successfully`);
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send('Error registering user');
+      });
+  });
+});
+
+
+
+// Login route
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true
+}));
 
 app.post('/games', (req, res) => {
   db.one('INSERT INTO games DEFAULT VALUES RETURNING id')
