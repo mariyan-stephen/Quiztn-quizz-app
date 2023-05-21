@@ -45,35 +45,35 @@ These instructions will get you a copy of the project up and running on your loc
 ### Installation
 
 1. Clone the repository:
-\```bash
+```bash
 git clone https://github.com/mariyan-stephen/Quiztn-quizz-app.git
-\```
+```
 
 2. Install the server dependencies:
-\```bash
+```bash
 cd Quiztn-quizz-app/server
 npm install
-\```
+```
 
 3. Install the client dependencies:
-\```bash
+```bash
 cd Quiztn-quizz-app/client
 npm install
-\```
+```
 
 ### Running the Application
 
 1. Start the server:
-\```bash
+```bash
 cd Quiztn-quizz-app/server
 npm start
-\```
+```
 
 2. In a new terminal, start the client:
-\```bash
+```bash
 cd Quiztn-quizz-app/client
 npm run dev
-\```
+```
 
 ## Built With
 
