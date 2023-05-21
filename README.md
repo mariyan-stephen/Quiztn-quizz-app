@@ -1,48 +1,81 @@
-# Quiztn - Real-time Multiplayer Quiz App
+# Quiztn Quizz App
 
-Quiztn is a real-time multiplayer quiz application that allows users to compete against each other by answering trivia questions in real-time. It's built with Node.js, Express.js, Socket.IO, and PostgreSQL.
+Quiztn is a quiz web application built with Express.js for the server-side and Svelte for the client-side. Users can choose from a variety of quizzes, attempt them, and view their scores.
 
 ## Features
-- Real-time multiplayer quizzes
-- User authentication
-- Multiple quiz rooms
-- Real-time chat system
-- Leaderboard
+- Variety of quizzes to attempt
+- Real-time score updates
+- Leaderboard to display top scores
 
 ## Technologies Used
-- Frontend: React.js, Socket.IO Client
-- Backend: Node.js, Express.js, Socket.IO
-- Database: PostgreSQL
-- Authentication: Passport.js
-- Deployment: ?
+- Frontend: Svelte
+- Backend: Node.js, Express.js
 
 ## Progress
-- [x] Set up your Node.js environment and initialize a new project.
-- [x] Set up Express.js for creating the server.
-- [ ] Set up Socket.IO for real-time communication.
-- [ ] Design your frontend with HTML, CSS, and JavaScript. Consider using Bootstrap or Material-UI for styling.
-- [x] Create your database schema for storing user information.
-- [ ] Create your database schema for storing quiz questions and scores.
-- [x] Implement user registration using Passport.js.
-- [x] Implement user login using Passport.js.
-- [ ] Implement the quiz logic on the server-side and use Socket.IO to push updates to the client-side.
-- [ ] Create a chat system where users can send and receive messages in real-time.
-- [ ] Implement a leaderboard to show the top scorers.
-- [ ] Add database migration using Knex.js.
-- [ ] Ensure proper error handling and security measures are in place.
-- [ ] Set up deployment (Heroku, AWS, etc.).
-- [ ] Write tests to ensure application functionality.
-- [ ] Create a user-friendly and visually appealing UI/UX.
+- [x] Set up Node.js and Express.js environment
+- [x] Initialize a new Express.js project
+- [x] Set up Svelte for the client-side
+- [x] Initialize a new Svelte project
+- [x] Establish basic routes in Express.js
+- [x] Create basic components and routes in Svelte
+- [ ] Fetch data from the server in Svelte
+- [ ] Implement quiz selection
+- [ ] Implement quiz logic
+- [ ] Implement real-time score updates
+- [ ] Implement leaderboard functionality
+- [ ] Create a visually appealing UI
 
 ## TODO
-- Set up Socket.IO for real-time communication.
-- Design the frontend with HTML, CSS, and JavaScript. Consider using Bootstrap or Material-UI for styling.
-- Create your database schema for storing quiz questions and scores.
-- Implement the quiz logic on the server-side and use Socket.IO to push updates to the client-side.
-- Create a chat system where users can send and receive messages in real-time.
-- Implement a leaderboard to show the top scorers.
-- Add database migration using Knex.js.
-- Ensure proper error handling and security measures are in place.
-- Set up deployment (Heroku, AWS, etc.).
-- Write tests to ensure application functionality.
-- Create a user-friendly and visually appealing UI/UX.
+- Fetch data from the server in Svelte
+- Implement quiz selection
+- Implement quiz logic
+- Implement real-time score updates
+- Implement leaderboard functionality
+- Create a visually appealing UI
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+- Node.js and npm
+- Git
+
+### Installation
+
+1. Clone the repository:
+\```bash
+git clone https://github.com/mariyan-stephen/Quiztn-quizz-app.git
+\```
+
+2. Install the server dependencies:
+\```bash
+cd Quiztn-quizz-app/server
+npm install
+\```
+
+3. Install the client dependencies:
+\```bash
+cd Quiztn-quizz-app/client
+npm install
+\```
+
+### Running the Application
+
+1. Start the server:
+\```bash
+cd Quiztn-quizz-app/server
+npm start
+\```
+
+2. In a new terminal, start the client:
+\```bash
+cd Quiztn-quizz-app/client
+npm run dev
+\```
+
+## Built With
+
+- [Express.js](https://expressjs.com/) - A minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+- [Svelte](https://svelte.dev/) - A JavaScript framework for building user interfaces.
