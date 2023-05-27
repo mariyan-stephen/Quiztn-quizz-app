@@ -2,7 +2,7 @@
     import { Router, Route, Link } from "svelte-routing";
     import Home from "./components/Home.svelte";
     import About from "./components/About.svelte";
-    import Quiz from "./components/Quiz.svelte";	
+    import Quiz from "./components/Quiz.svelte";
 </script>
 
 <Router>
@@ -15,3 +15,4 @@
     <Route path="/about" component={About} />
     <Route path="/quiz" component={Quiz} />
 </Router>
+
