@@ -1,11 +1,11 @@
 # Quiztn Quizz App
 
-Quiztn is a quiz web application built with Express.js for the server-side and Svelte for the client-side. Users can choose from a variety of quizzes, attempt them, and view their scores.
+Quiztn is a quiz web application built with Express.js for the server-side and Svelte for the client-side. Users can enjoy a single-question-at-a-time quiz experience with real-time updates.
 
 ## Features
-- Variety of quizzes to attempt
-- Real-time score updates
-- Leaderboard to display top scores
+- Single-question-at-a-time experience
+- Questions fetched from a free public API
+- Real-time quiz navigation
 
 ## Technologies Used
 - Frontend: Svelte
@@ -18,17 +18,13 @@ Quiztn is a quiz web application built with Express.js for the server-side and S
 - [x] Initialize a new Svelte project
 - [x] Establish basic routes in Express.js
 - [x] Create basic components and routes in Svelte
-- [ ] Fetch data from the server in Svelte
-- [ ] Implement quiz selection
-- [ ] Implement quiz logic
+- [x] Fetch data from a free public API in Svelte
+- [x] Implement single-question-at-a-time quiz logic
 - [ ] Implement real-time score updates
 - [ ] Implement leaderboard functionality
 - [ ] Create a visually appealing UI
 
 ## TODO
-- Fetch data from the server in Svelte
-- Implement quiz selection
-- Implement quiz logic
 - Implement real-time score updates
 - Implement leaderboard functionality
 - Create a visually appealing UI

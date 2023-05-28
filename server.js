@@ -10,8 +10,12 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const db = require('./database');
 const bcrypt = require('bcrypt');
+const path = require('path');
+const cors = require('cors');
 
 const saltRounds = 10;
+
+app.use(cors());
 
 // Use sessions for tracking logins
 app.use(session({
@@ -25,7 +29,8 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Passport setup code
+app.use(express.static(path.resolve(__dirname, 'public')));
+
 passport.use(new LocalStrategy(
   function(username, password, done) {
     db.one('SELECT * FROM users WHERE username = $1', [username])
@@ -51,22 +56,15 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-// Registration route
 app.post('/register', (req, res) => {
   const { username, password, email } = req.body;
-
-  // Hash the password
   bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
     if (err) {
       console.error(err);
       res.status(500).send('Error registering user');
       return;
     }
-
-    // Log the user data right before making the query
-    console.log('Registering user:', { username, password, email });
-
-    // Insert the new user into the database
+    console.log('Registering user:', { username, password: hashedPassword, email });
     db.none('INSERT INTO users (username, password, email) VALUES ($1, $2, $3)', [username, hashedPassword, email])
       .then(() => {
         res.send(`User ${username} registered successfully`);
@@ -78,9 +76,6 @@ app.post('/register', (req, res) => {
   });
 });
 
-
-
-// Login route
 app.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/login',
@@ -99,13 +94,8 @@ app.post('/games', (req, res) => {
 });
 
 app.post('/games/:id/join', (req, res) => {
-  // Get the game ID from the URL
   const gameId = req.params.id;
-  
-  // Get the user ID from the session
   const userId = req.user.id;
-  
-  // Add the user to the game
   db.none('INSERT INTO game_participants (game_id, user_id) VALUES ($1, $2)', [gameId, userId])
     .then(() => {
       res.send(`User ${userId} joined game ${gameId}`);
@@ -117,14 +107,10 @@ app.post('/games/:id/join', (req, res) => {
 });
 
 app.post('/games/:id/answer', (req, res) => {
-  // This endpoint should accept a user's answer for the current question
-  // For now, let's just send a placeholder response
   res.send(`Answer received for game ${req.params.id}!`);
 });
 
 app.get('/games/:id', (req, res) => {
-  // This endpoint should return the current state of a game
-  // For now, let's just send a placeholder response
   res.send(`Game state for game ${req.params.id}!`);
 });
 
