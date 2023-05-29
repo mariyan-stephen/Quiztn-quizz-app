@@ -12,19 +12,32 @@
         .then(data => {
             questions = data.results.map((question, index) => ({
                 id: index + 1,
-                questionText: decodeHtml(question.question),
+                questionText: question.question,
                 answers: [
-                    ...question.incorrect_answers.map(answer => ({ answerText: decodeHtml(answer) })),
-                    { answerText: decodeHtml(question.correct_answer) }
-                ]
+                    ...question.incorrect_answers.map(answer => ({ answerText: answer, isCorrect: false })),
+                    { answerText: question.correct_answer, isCorrect: true }
+                ].sort(() => Math.random() - 0.5) // to shuffle the answers
             }));
         });
 
     let currentQuestionIndex = 0;
+    let selectedAnswer = null;
+    let score = 0;
+
+    function selectAnswer(answer) {
+        selectedAnswer = answer;
+    }
 
     function nextQuestion() {
+        if (selectedAnswer && selectedAnswer.isCorrect) {
+            score++;
+        }
+        selectedAnswer = null;
         if (currentQuestionIndex < questions.length - 1) {
             currentQuestionIndex++;
+        } else {
+            // Quiz ended. Do something with the score.
+            console.log('Quiz ended. Your score: ', score);
         }
     }
 </script>
@@ -35,10 +48,11 @@
         <ul>
             {#each questions[currentQuestionIndex].answers as answer (answer.answerText)}
                 <li>
-                    <button on:click={nextQuestion}>{answer.answerText}</button>
+                    <button on:click={() => selectAnswer(answer)}>{answer.answerText}</button>
                 </li>
             {/each}
         </ul>
+        <button on:click={nextQuestion}>Next Question</button>
     </div>
 {:else}
     <div>Loading...</div>
