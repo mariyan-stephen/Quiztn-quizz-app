@@ -80,23 +80,25 @@
     }
 </style>
 
-{#if quizFinished}
-    <div class="score-display">
-        <h2>Your score: {score}/{questions.length}</h2>
-    </div>
-{:else if questions.length > 0}
-    <div class="quiz-container">
-        <div class="question">
-            <h2>{decodeHtml(questions[currentQuestionIndex].questionText)}</h2>
+<div class="component">
+    {#if quizFinished}
+        <div class="score-display">
+            <h2>Your score: {score}/{questions.length}</h2>
         </div>
-        <ul>
-            {#each questions[currentQuestionIndex].answers as answer (answer.answerText)}
-                <li class="option" on:click={() => checkAnswer(answer)}>
-                    {decodeHtml(answer.answerText)}
-                </li>
-            {/each}
-        </ul>
-    </div>
-{:else}
-    <div>Loading...</div>
-{/if}
+    {:else if questions.length > 0}
+        <div class="quiz-container">
+            <div class="question">
+                <h2>{decodeHtml(questions[currentQuestionIndex].questionText)}</h2>
+            </div>
+            <ul>
+                {#each questions[currentQuestionIndex].answers as answer (answer.answerText)}
+                    <li class="option" on:click={() => checkAnswer(answer)}>
+                        {decodeHtml(answer.answerText)}
+                    </li>
+                {/each}
+            </ul>
+        </div>
+    {:else}
+        <div>Loading...</div>
+    {/if}
+</div>
