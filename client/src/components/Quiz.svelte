@@ -56,17 +56,24 @@
     }
 
     ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
         list-style: none;
         padding: 0;
+        width: 100%;
     }
 
     .option {
         background-color: #f0f0f0;
         padding: 1em;
-        margin: 0.5em;
         border-radius: 10px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 
     .option:hover {
